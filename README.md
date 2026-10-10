@@ -2,7 +2,7 @@
 
 ![calm-spinner](docs/banner.png)
 
-A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) mod that replaces the spinner line shown while Claude works with an animated braille spinner, a label for what it is doing with a moving color gradient, and the elapsed time.
+A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) mod that replaces the spinner line shown while Claude works with an animated braille spinner, a label for what it is doing with a bright band sweeping across it, and the elapsed time.
 
 ## Before
 
@@ -21,7 +21,7 @@ The stock line rotates through whimsical verbs and spells out the effort level:
 | requesting | ⠹ waiting |
 | tool input / tool use | ⠹ working |
 
-The spinner steps through ten braille frames, one every 100 ms. The label is drawn one character at a time in colors swept across a violet, pink and orange band, shifting every 100 ms so the gradient flows across the word. When Claude Code overrides the spinner with a message of its own, that message gets the same treatment.
+The spinner steps through ten braille frames, one every 100 ms. Both are drawn in the `claude` color from your Claude Code theme, so they follow `/theme`. The label is dim except for a bold band three characters wide that moves one character every 100 ms, entering and leaving off the edges of the word. To use another color, set `BASE_COLOR` in `hooks/register.tsx` to any theme key, a named ANSI color such as `magenta` (drawn from your terminal's palette), or a hex value. When Claude Code overrides the spinner with a message of its own, that message gets the same treatment.
 
 ## Install
 
@@ -73,5 +73,5 @@ npx -p typescript tsc -p . --noEmit
 | `.claude-plugin/marketplace.json` | Makes the repository installable with `/plugin install` |
 | `hooks/hooks.json` | Points at the hooks module |
 | `hooks/register.tsx` | The `ui.render` hook for `Spinner` and the turn timer |
-| `hooks/register.test.ts` | Tests for the time format, gradient and spinner frames |
+| `hooks/register.test.ts` | Tests for the time format, highlight band and spinner frames |
 | `types/index.d.ts` | The `$.state` contract |
