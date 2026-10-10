@@ -1,6 +1,6 @@
 import { expect, test } from 'claude-code/testing'
 
-import { formatElapsed, gradientColor, spinnerFrame } from './register'
+import { formatElapsed, isHighlighted, spinnerFrame } from './register'
 
 test('formats elapsed time', () => {
   expect(formatElapsed(0)).toBe('0s')
@@ -8,10 +8,16 @@ test('formats elapsed time', () => {
   expect(formatElapsed(64)).toBe('1m 4s')
 })
 
-test('gradient colors are hex and move with the tick', () => {
-  expect(gradientColor(0, 0)).toMatch(/^#[0-9a-f]{6}$/)
-  expect(gradientColor(3, 1)).not.toBe(gradientColor(3, 0))
-  expect(gradientColor(1, 1)).toBe(gradientColor(0, 0))
+test('highlight band sweeps across the label and wraps', () => {
+  const lit = (tick: number) =>
+    [0, 1, 2, 3, 4].filter(index => isHighlighted(index, tick, 5))
+  expect(lit(0)).toEqual([])
+  expect(lit(1)).toEqual([0])
+  expect(lit(3)).toEqual([0, 1, 2])
+  expect(lit(4)).toEqual([1, 2, 3])
+  expect(lit(7)).toEqual([4])
+  expect(lit(8)).toEqual([])
+  expect(lit(11)).toEqual(lit(0))
 })
 
 test('spinner cycles through its frames', () => {
