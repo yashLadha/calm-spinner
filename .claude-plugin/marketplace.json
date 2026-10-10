@@ -1,0 +1,6 @@
+{
+  "name": "calm-spinner",
+  "description": "A calmer, prettier spinner line for Claude Code",
+  "owner": { "name": "Yash Ladha" },
+  "plugins": [{ "name": "calm-spinner", "source": "./" }]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "calm-spinner",
+  "version": "0.2.0",
+  "description": "Replaces the spinner line with an emoji, a gradient-animated label and the elapsed time",
+  "author": { "name": "Yash Ladha", "email": "yash@yashladha.in" },
+  "types": "./types/index.d.ts"
+}
