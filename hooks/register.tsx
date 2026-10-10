@@ -8,14 +8,18 @@ const FRAME_MS = 100
 const HUE_START = 280
 const HUE_SPAN = 120
 const HUE_STEP = 12
+const SPINNER_FRAMES = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'] as const
 
-const MODES = {
-  requesting: { emoji: '⏳', label: 'waiting' },
-  responding: { emoji: '📝', label: 'writing' },
-  thinking: { emoji: '🧠', label: 'thinking' },
-  'tool-input': { emoji: '🔧', label: 'working' },
-  'tool-use': { emoji: '🔧', label: 'working' },
+const LABELS = {
+  requesting: 'waiting',
+  responding: 'writing',
+  thinking: 'thinking',
+  'tool-input': 'working',
+  'tool-use': 'working',
 } as const
+
+export const spinnerFrame = (tick: number): string =>
+  SPINNER_FRAMES[tick % SPINNER_FRAMES.length] ?? SPINNER_FRAMES[0]
 
 export const formatElapsed = (seconds: number): string =>
   seconds < 60 ? `${seconds}s` : `${Math.floor(seconds / 60)}m ${seconds % 60}s`
@@ -63,14 +67,13 @@ export const register: Register = on => {
 
   on('ui.render', { component: 'Spinner' }, async ($, e, next) => {
     const { Text } = $.ui.resolve(e)
-    const mode = MODES[e.props.mode]
-    const label = e.props.message ?? mode.label
+    const label = e.props.message ?? LABELS[e.props.mode]
     const tick = await read($, frame)
     const seconds = await read($, elapsedSeconds)
 
     return (
       <Text>
-        {mode.emoji}{' '}
+        <Text color={gradientColor(0, tick)}>{spinnerFrame(tick)}</Text>{' '}
         {[...label].map((char, index) => (
           <Text key={String(index)} color={gradientColor(index, tick)} bold>
             {char}
