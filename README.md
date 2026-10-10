@@ -2,7 +2,7 @@
 
 ![calm-spinner](docs/banner.png)
 
-A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) mod that replaces the spinner line shown while Claude works with an emoji for what it is doing, a label with a moving color gradient, and the elapsed time.
+A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) mod that replaces the spinner line shown while Claude works with an animated braille spinner, a label for what it is doing with a moving color gradient, and the elapsed time.
 
 ## Before
 
@@ -16,12 +16,12 @@ The stock line rotates through whimsical verbs and spells out the effort level:
 
 | Mode | Shown as |
 | --- | --- |
-| thinking | 🧠 thinking |
-| responding | 📝 writing |
-| requesting | ⏳ waiting |
-| tool input / tool use | 🔧 working |
+| thinking | ⠹ thinking |
+| responding | ⠹ writing |
+| requesting | ⠹ waiting |
+| tool input / tool use | ⠹ working |
 
-The label is drawn one character at a time in colors swept across a violet, pink and orange band, shifting every 100 ms so the gradient flows across the word. When Claude Code overrides the spinner with a message of its own, that message gets the same treatment.
+The spinner steps through ten braille frames, one every 100 ms. The label is drawn one character at a time in colors swept across a violet, pink and orange band, shifting every 100 ms so the gradient flows across the word. When Claude Code overrides the spinner with a message of its own, that message gets the same treatment.
 
 ## Install
 
@@ -73,5 +73,5 @@ npx -p typescript tsc -p . --noEmit
 | `.claude-plugin/marketplace.json` | Makes the repository installable with `/plugin install` |
 | `hooks/hooks.json` | Points at the hooks module |
 | `hooks/register.tsx` | The `ui.render` hook for `Spinner` and the turn timer |
-| `hooks/register.test.ts` | Tests for the time format and gradient |
+| `hooks/register.test.ts` | Tests for the time format, gradient and spinner frames |
 | `types/index.d.ts` | The `$.state` contract |
