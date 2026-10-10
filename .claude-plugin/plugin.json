@@ -1,6 +1,6 @@
 {
   "name": "calm-spinner",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Replaces the spinner line with an animated spinner, a gradient-animated label and the elapsed time",
   "author": { "name": "Yash Ladha", "email": "yash@yashladha.in" },
   "types": "./types/index.d.ts"
